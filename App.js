@@ -7,14 +7,24 @@ import * as Font from 'expo-font';
 import Index from './src/index';
 
 export default class App extends React.Component {
-  componentDidMount() {
-    Font.loadAsync({
+  state = {
+    fontLoaded: false,
+  };
+  async componentDidMount() {
+    await Font.loadAsync({
       'ubuntu-regular': require('./assets/font//Ubuntu-Regular.ttf'),
     });
+    this.setState({ fontLoaded: true });
   }
   render() {
     return (
-      <Index />
+      <>
+        {
+          this.state.fontLoaded ? (
+            <Index />
+          ) : null
+        }
+      </>
     );
   }
 }
